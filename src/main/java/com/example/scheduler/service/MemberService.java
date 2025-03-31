@@ -23,11 +23,11 @@ public class MemberService {
     private final SchedulerRepository schedulerRepository;
 
     // 유저 생성 회원가입
-    public SignUpResponseDto signUp(String username, String email) {
-        Member member = new Member(username, email);
+    public SignUpResponseDto signUp(String username, String email, String password) {
+        Member member = new Member(username, email, password);
         Member savedMember = memberRepository.save(member);
 
-        return new SignUpResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail());
+        return new SignUpResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail(), savedMember.getPassword());
     }
 
     // 특정 유저 조회

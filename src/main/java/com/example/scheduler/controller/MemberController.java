@@ -20,7 +20,7 @@ public class MemberController {
     // 유저 생성 회원가입
     @PostMapping("/signup")
     public ResponseEntity<SignUpResponseDto> signup(@RequestBody SignUpRequestDto requestDto) {
-        SignUpResponseDto signUpResponseDto = memberService.signUp(requestDto.getUsername(), requestDto.getEmail());
+        SignUpResponseDto signUpResponseDto = memberService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
 
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
     }
