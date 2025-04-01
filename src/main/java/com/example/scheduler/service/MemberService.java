@@ -7,6 +7,7 @@ import com.example.scheduler.dto.SignUpResponseDto;
 import com.example.scheduler.entity.Member;
 import com.example.scheduler.entity.Scheduler;
 import com.example.scheduler.exception.CustomException;
+import com.example.scheduler.exception.InvalidPasswordException;
 import com.example.scheduler.repository.MemberRepository;
 import com.example.scheduler.repository.SchedulerRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -72,7 +73,7 @@ public class MemberService {
         Member member = memberRepository.findMemberByEmailOrElseThrow(requestDto.getEmail());
 
         if(!member.getPassword().equals(requestDto.getPassword())) {
-            throw new CustomException(HttpStatus.UNAUTHORIZED, "C001", "비밀번호가 올바르지 않습니다.");
+            throw new InvalidPasswordException("비밀번호가 올바르지 않습니다.");
         }
 
         HttpSession session = request.getSession();

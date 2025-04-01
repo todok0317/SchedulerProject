@@ -3,6 +3,7 @@ package com.example.scheduler.controller;
 import com.example.scheduler.dto.CreatedSchedulerRequestDto;
 import com.example.scheduler.dto.SchedulerResponseDto;
 import com.example.scheduler.service.SchedulerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class SchedulerController {
 
     // 일정 생성
     @PostMapping
-    public ResponseEntity<SchedulerResponseDto> save(@RequestBody CreatedSchedulerRequestDto requestDto) {
+    public ResponseEntity<SchedulerResponseDto> save(@Valid @RequestBody CreatedSchedulerRequestDto requestDto) {
         SchedulerResponseDto schedulerResponseDto = schedulerService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getEmail());
 
         return new ResponseEntity<>(schedulerResponseDto, HttpStatus.CREATED);
