@@ -1,10 +1,10 @@
 package com.example.scheduler.controller;
 
-import com.example.scheduler.dto.MemberResponseDto;
-import com.example.scheduler.dto.SignUpRequestDto;
-import com.example.scheduler.dto.SignUpResponseDto;
-import com.example.scheduler.dto.UpdateEmailRequestDto;
+import com.example.scheduler.dto.*;
 import com.example.scheduler.service.MemberService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +46,20 @@ public class MemberController {
     public ResponseEntity<MemberResponseDto> delete(@PathVariable Long id) {
         memberService.delete(id);
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 로그인 기능
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto, HttpServletRequest request) {
+        LoginResponseDto responseDto = memberService.login(requestDto, request);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    // 로그아웃 기능
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout (HttpServletRequest request) {
+        memberService.logout(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

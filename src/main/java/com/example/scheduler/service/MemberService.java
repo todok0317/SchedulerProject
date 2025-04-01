@@ -1,11 +1,15 @@
 package com.example.scheduler.service;
 
+import com.example.scheduler.dto.LoginRequestDto;
+import com.example.scheduler.dto.LoginResponseDto;
 import com.example.scheduler.dto.MemberResponseDto;
 import com.example.scheduler.dto.SignUpResponseDto;
 import com.example.scheduler.entity.Member;
 import com.example.scheduler.entity.Scheduler;
 import com.example.scheduler.repository.MemberRepository;
 import com.example.scheduler.repository.SchedulerRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -27,7 +31,7 @@ public class MemberService {
         Member member = new Member(username, email, password);
         Member savedMember = memberRepository.save(member);
 
-        return new SignUpResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail(), savedMember.getPassword());
+        return new SignUpResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail());
     }
 
     // 특정 유저 조회
@@ -60,6 +64,28 @@ public class MemberService {
         Member findMember = memberRepository.findByIdOrElseThrow(id);
 
         memberRepository.delete(findMember);
+    }
+
+    // 로그인
+    public LoginResponseDto login (LoginRequestDto requestDto, HttpServletRequest request) {
+        Member member = memberRepository.findMemberByUsernameOrElseThrow(requestDto.getEmail());
+
+        if(!member.getPassword().equals(requestDto.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 올바르지 않습니다.");
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("sessionKey", member.getId());
+
+        return new LoginResponseDto(member.getUsername(), "로그인 성공");
+    }
+
+    // 로그아웃
+    public void logout (HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
     }
 
 

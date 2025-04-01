@@ -20,4 +20,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
         return findMemberByUsername(username).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "작성자를 찾지 못했습니다"));
     }
 
+    // 로그인 기능
+    Optional<Member> findMemberByEmail(String email);
+
+    default Member findMemberByEmailOrElseThrow(String email){
+        return findMemberByEmail(email).orElseThrow(()-> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "이메일 또는 비밀번호가 틀렸습니다."));
+    }
+
+
+
 }
