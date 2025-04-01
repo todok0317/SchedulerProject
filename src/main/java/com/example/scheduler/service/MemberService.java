@@ -76,7 +76,7 @@ public class MemberService {
     public LoginResponseDto login (LoginRequestDto requestDto, HttpServletRequest request) {
         Member member = memberRepository.findMemberByEmailOrElseThrow(requestDto.getEmail());
 
-        if(!member.getPassword().equals(requestDto.getPassword())) {
+        if(!passwordEncoder.matches(requestDto.getPassword(), member.getPassword())) {
             throw new InvalidPasswordException("비밀번호가 올바르지 않습니다.");
         }
 

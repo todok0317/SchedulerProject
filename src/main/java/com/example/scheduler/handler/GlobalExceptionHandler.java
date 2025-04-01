@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
                 e.getCode(),
                 e.getMessage(),
                 e.getStatus(),
-                List.of(new FieldErrorResponse("password", e.getMessage()))
+                List.of(new FieldErrorResponse("email", e.getMessage()))
         );
         return new ResponseEntity<>(errorResponse, e.getStatus());
     }
