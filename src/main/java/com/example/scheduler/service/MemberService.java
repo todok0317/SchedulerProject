@@ -1,5 +1,6 @@
 package com.example.scheduler.service;
 
+import com.example.scheduler.config.PasswordEncoder;
 import com.example.scheduler.dto.LoginRequestDto;
 import com.example.scheduler.dto.LoginResponseDto;
 import com.example.scheduler.dto.MemberResponseDto;
@@ -26,11 +27,14 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final SchedulerRepository schedulerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // 유저 생성 회원가입
     public SignUpResponseDto signUp(String username, String email, String password) {
-        Member member = new Member(username, email, password);
+        // 비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(password);
+
+        Member member = new Member(username, email, encodedPassword);
         Member savedMember = memberRepository.save(member);
 
         return new SignUpResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail());
