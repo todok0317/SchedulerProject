@@ -19,7 +19,7 @@ public class SchedulerController {
     // 일정 생성
     @PostMapping
     public ResponseEntity<SchedulerResponseDto> save(@RequestBody CreatedSchedulerRequestDto requestDto) {
-        SchedulerResponseDto schedulerResponseDto = schedulerService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getUsername());
+        SchedulerResponseDto schedulerResponseDto = schedulerService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getEmail());
 
         return new ResponseEntity<>(schedulerResponseDto, HttpStatus.CREATED);
     }

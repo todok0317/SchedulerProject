@@ -10,12 +10,12 @@ public class CreatedSchedulerRequestDto {
 
     private final String contents;
 
-    private final String username;
+    private final String email;
 
-    public CreatedSchedulerRequestDto(String title, String contents, String username) {
+    public CreatedSchedulerRequestDto(String title, String contents, String email) {
         this.title = title;
         this.contents = contents;
-        this.username = username;
+        this.email = email;
     }
 
 

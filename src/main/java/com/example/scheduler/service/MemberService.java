@@ -69,7 +69,7 @@ public class MemberService {
 
     // 로그인
     public LoginResponseDto login (LoginRequestDto requestDto, HttpServletRequest request) {
-        Member member = memberRepository.findMemberByUsernameOrElseThrow(requestDto.getEmail());
+        Member member = memberRepository.findMemberByEmailOrElseThrow(requestDto.getEmail());
 
         if(!member.getPassword().equals(requestDto.getPassword())) {
             throw new CustomException(HttpStatus.UNAUTHORIZED, "C001", "비밀번호가 올바르지 않습니다.");

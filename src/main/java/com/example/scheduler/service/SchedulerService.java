@@ -18,8 +18,8 @@ public class SchedulerService {
     private final SchedulerRepository schedulerRepository;
 
     // 일정 생성
-    public SchedulerResponseDto save(String title, String contents, String username) {
-        Member findMember = memberRepository.findMemberByUsernameOrElseThrow(username);
+    public SchedulerResponseDto save(String title, String contents, String email) {
+        Member findMember = memberRepository.findMemberByEmailOrElseThrow(email);
 
         Scheduler scheduler = new Scheduler(title, contents);
         scheduler.setMember(findMember);
