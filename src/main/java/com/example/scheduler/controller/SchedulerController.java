@@ -53,7 +53,7 @@ public class SchedulerController {
     // 특정 일정 수정
     @PutMapping("/{id}")
     public ResponseEntity<SchedulerResponseDto> update(@PathVariable Long id, @Valid @RequestBody UpdateSchedulerRequestDto requestDto){
-        SchedulerResponseDto schedulerResponseDto = schedulerService.update(id, requestDto.getTitle(), requestDto.getTitle());
+        SchedulerResponseDto schedulerResponseDto = schedulerService.update(id, requestDto.getTitle(), requestDto.getContents());
 
         return new ResponseEntity<>(schedulerResponseDto, HttpStatus.OK);
     }

@@ -1,6 +1,7 @@
 package com.example.scheduler.service;
 
 import com.example.scheduler.dto.CommentResponseDto;
+import com.example.scheduler.dto.SchedulerResponseDto;
 import com.example.scheduler.entity.Comment;
 import com.example.scheduler.entity.Member;
 import com.example.scheduler.entity.Scheduler;
@@ -9,6 +10,9 @@ import com.example.scheduler.repository.MemberRepository;
 import com.example.scheduler.repository.SchedulerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,4 +40,39 @@ public class CommentService {
         commentRepository.save(comment);
         return new CommentResponseDto(comment.getId(),comment.getContent());
     }
+
+    // 댓글 전체 조회
+    public List<CommentResponseDto> findAll(){
+        return commentRepository.findAll().stream().map(CommentResponseDto :: toDto).toList();
+    }
+
+    // 특정 일정의 특정 댓글 조회
+    public CommentResponseDto findById(Long id){
+        Comment findComment = commentRepository.findByIdOrElseThorw(id);
+        Member writer = findComment.getMember();
+
+        return new CommentResponseDto(findComment.getId(), findComment.getContent());
+    }
+
+    // 특정 일정의 특정 댓글 수정
+    @Transactional
+    public CommentResponseDto update(Long id, String content){
+        Comment comment = commentRepository.findByIdOrElseThorw(id);
+
+        comment.update(content);
+
+        return new CommentResponseDto(comment.getId(), comment.getContent());
+    }
+
+
+    // 특정 일정의 특정 댓글 삭제
+    public void delete (Long id) {
+        Comment findComment = commentRepository.findByIdOrElseThorw(id);
+
+        commentRepository.delete(findComment);
+    }
+
+
+
+
 }

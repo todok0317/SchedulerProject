@@ -7,6 +7,7 @@ import com.example.scheduler.repository.MemberRepository;
 import com.example.scheduler.repository.SchedulerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class SchedulerService {
     }
 
     // 특정 일정 수정
+    @Transactional
     public SchedulerResponseDto update(Long id, String title, String contents){
         Scheduler scheduler = schedulerRepository.findByIdOrElseThorw(id);
 
