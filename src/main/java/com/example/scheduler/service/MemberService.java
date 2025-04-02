@@ -6,16 +6,12 @@ import com.example.scheduler.dto.LoginResponseDto;
 import com.example.scheduler.dto.MemberResponseDto;
 import com.example.scheduler.dto.SignUpResponseDto;
 import com.example.scheduler.entity.Member;
-import com.example.scheduler.entity.Scheduler;
-import com.example.scheduler.exception.CustomException;
 import com.example.scheduler.exception.InvalidPasswordException;
 import com.example.scheduler.repository.MemberRepository;
-import com.example.scheduler.repository.SchedulerRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -81,7 +77,7 @@ public class MemberService {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("sessionKey", member.getId());
+        session.setAttribute("memberId", member.getId());
 
         return new LoginResponseDto(member.getUsername(), "로그인 성공");
     }

@@ -2,13 +2,13 @@ package com.example.scheduler.dto;
 
 import com.example.scheduler.entity.Comment;
 import com.example.scheduler.entity.Member;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
 @Getter
 public class CommentRequestDto {
 
-    // 로그인 성립 POST /schedulers/{schedulerId}특정 일정조회/comments댓글달기 ->content
-
+    @NotBlank(message = "필수 입력값입니다.")
     private final String content;
 
     public CommentRequestDto(String content) {
