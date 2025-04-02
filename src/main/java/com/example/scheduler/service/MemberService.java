@@ -53,7 +53,7 @@ public class MemberService {
         return new MemberResponseDto(findMember.getUsername(),findMember.getEmail());
     }
 
-    // 비밀번호 수정
+    // 이메일 수정
     @Transactional
     public void updateEmail(Long id, String oldEmail, String newEmail) {
         Member findMember = memberRepository.findByIdOrElseThrow(id);

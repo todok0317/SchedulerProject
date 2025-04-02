@@ -2,6 +2,8 @@ package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.CreatedSchedulerRequestDto;
 import com.example.scheduler.dto.SchedulerResponseDto;
+import com.example.scheduler.dto.SchedulerResponseDto;
+import com.example.scheduler.dto.UpdateSchedulerRequestDto;
 import com.example.scheduler.service.SchedulerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +35,28 @@ public class SchedulerController {
         return new ResponseEntity<>(schedulerResponseDtos, HttpStatus.OK);
     }
 
+    // 특정 일정 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<SchedulerResponseDto> findById(@PathVariable Long id) {
+        SchedulerResponseDto responseDto = schedulerService.findById(id);
+
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
     // 특정 일정 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<SchedulerResponseDto> delete (@PathVariable Long id) {
         schedulerService.delete(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 특정 일정 수정
+    @PutMapping("/{id}")
+    public ResponseEntity<SchedulerResponseDto> update(@PathVariable Long id, @Valid @RequestBody UpdateSchedulerRequestDto requestDto){
+        SchedulerResponseDto schedulerResponseDto = schedulerService.update(id, requestDto.getTitle(), requestDto.getTitle());
+
+        return new ResponseEntity<>(schedulerResponseDto, HttpStatus.OK);
     }
 
 }
