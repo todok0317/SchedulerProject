@@ -1,13 +1,9 @@
 package com.example.scheduler.repository;
 
 import com.example.scheduler.entity.Member;
-import com.example.scheduler.exception.CustomException;
 import com.example.scheduler.exception.EmailNotFoundException;
 import com.example.scheduler.exception.UserNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {

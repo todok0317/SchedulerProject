@@ -2,7 +2,6 @@ package com.example.scheduler.controller;
 
 import com.example.scheduler.dto.CreatedSchedulerRequestDto;
 import com.example.scheduler.dto.SchedulerResponseDto;
-import com.example.scheduler.dto.SchedulerResponseDto;
 import com.example.scheduler.dto.UpdateSchedulerRequestDto;
 import com.example.scheduler.service.SchedulerService;
 import jakarta.validation.Valid;

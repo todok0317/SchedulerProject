@@ -1,7 +1,5 @@
 package com.example.scheduler.dto;
 
-import com.example.scheduler.entity.Comment;
-import com.example.scheduler.entity.Member;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
