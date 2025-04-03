@@ -37,17 +37,12 @@ public class MemberService {
     }
 
     // 특정 유저 조회
-    public MemberResponseDto findById (Long id) {
-        Optional<Member> optionalMember = memberRepository.findById(id);
+    public MemberResponseDto findById(Long id) {
+        Member findMember = memberRepository.findByIdOrElseThrow(id);
 
-        if(optionalMember.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디가 없습니다.");
-        }
-
-        Member findMember = optionalMember.get();
-
-        return new MemberResponseDto(findMember.getUsername(),findMember.getEmail());
+        return new MemberResponseDto(findMember.getUsername(), findMember.getEmail());
     }
+
 
     // 이메일 수정
     @Transactional
