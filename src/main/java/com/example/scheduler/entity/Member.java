@@ -11,7 +11,7 @@ import java.util.List;
 public class Member extends BaseEntity {
 
     // CascadeType.ALL을 사용하면 연관된 일정도 함께 삭제됨
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Scheduler> schedulers;
 
     @Id
