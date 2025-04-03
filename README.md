@@ -2,7 +2,8 @@
 ![image](https://github.com/user-attachments/assets/6b4741ae-ca71-49ac-972e-ce67d8db15d2)
 
 ## ERD 
-![img.png](img.png)
+![Scheduler](https://github.com/user-attachments/assets/157113e9-c3a2-48e0-846d-c481c7419ee6)
+
 ## SQL
 
 ```
